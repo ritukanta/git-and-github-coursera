@@ -62,6 +62,22 @@ sudo port install git
 > - Likewise u can modify the upcoming windows in this installation process by reading on-screen text. I'm providing my screenshots how I've installed, in the /images directory.
 
 # Before Version Control
+
+### Intro to Module 1
+
+- It's super important to have detailed historical information of ur configuration files and source code u're working on. Git does that properly. It also provides the documentation of ur code history so that ur fellow coders or future collaborators can know why the change has been made, and how does it work.
+
+- Git stores the historical copies of ur code that helps to know what were the changes u made and also helps in reverting back if the latest changes have some bugs.
+
+### Diffing Files
+
+- Say u've two files of some code and u want to check the difference between them, Checking difference means if there a few lines are added or removed from the previous file. What will u do to find the difference? Of course, u'll open those files using a text editor side by side and try to spot added lines or removed lines.
+
+- But it's just us, human eyes, take time to spot and understand the difference and tend to make mistakes in the way. Fortunately, there is a better way for computers, called <code>diff</code> command line tool. It takes two files and find the differences in a few formats.
+
+
+
+
 # VCSs
 # Using Git
 # Practice Quiz
