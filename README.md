@@ -159,5 +159,96 @@ $ cat change.diff
 
 - By using a VCS, we can know when the changes were made and who made them, even why made them. It also lets us easily revert a chnage if it turned out not to be a good idea.
 
+### Version Control and Automation
+
+- A **VCS** can invaluable, even in a one-persion IT department. It can help even if u don't need to share ur scripts or collaborate on them with others.
+
+- A **VCS** can function a lot like a time machine, giving u insights into the decisions of the past. Whenever u write a <code>commit message</code>, after making change, it's as if the current version of urself is explaining ur decisions to a future you or others who might work on the same scripts and configs in the future.
+
+### What is Git?
+
+- Git is a VCS created in __2005__ by __Linus Torvalds__, the developer who started in __Linux Kernel__.
+
+- Git is a free <code>Open Source System</code> available for installation on __UNIX__ based platforms, __Windows__ and __MacOS__. It was originally created to get help to manage developing the Linux Kernel.
+
+- Git is now one of the most popular VCSs and is used in millions of projects. Git has a distributed architecture, this means that every person contributing a **repository** has a full copy of it on their own development machines.
+
+- Collaborators can contribute and pull in changes that others have made as they need. And because the repositories are all local to the computer being used to create the files, most operations can be done really fast. Git doesn't rely on any kind of **centralized server** to provide control organizations to its workflow.
+
+- Git can work as stand alone program as a server and as a client. This means that u can use Git on a single machine without even having a **network connection**.
+
+- Git clients can communicate with Git servers over the network using <code>HTTP</code>, <code>SSH</code> (Secure Shell) or Git's own special protocol. U can use it for small projects with like one developer or huge projects with thousands of contributors, on a public server like **Github**, **Gitlab** or others.
+
+- In case u didn't know, the official portal for Git is: https://git-scm.com. And wonder what does SCM stands for? It's actually **Source Control Management**, just another acronym of Version Control System or VCS.
+
+### More Information About Git
+
+- Checkout the following sites for more information about Git:<br>
+<br>
+
+> https://git-scm.com/doc<br>
+
+> https://www.mercurial-scm.org/<br>
+
+> https://subversion.apache.org/<br>
+
+> https://en.wikipedia.org/wiki/Version_control<br>
+
+### Practice Quiz: Version Control
+
+1. **How can a VCS (Version Control System) come in handy when updating your software, even if you’re a solo programmer?**<br>
+*ans.* Git retains local copies of repositories resulting in fast operations; if something breaks due to a change, u can fix the problem by reverting to a working version before the change; Git allows u to review the history of ur project.
+
+2. **Who is the original creator and main developer of the VCS too Git?**<br>
+*ans.* Linus Torvalds
+
+3. **___________ is a feature of software management system that records changes to a file or set of files over time so that u can recall specific versions later.**<br>
+*ans.* Version Control
+
+4. **A ________ is a collection of edits which has been submitted to the VCS for safe keeping.**<br>
+*ans.* Commit
+
+5. **Within a VCS, project files are organized in centralized locations called ____________ where they can be called upon later.**<br>
+*ans.* Repositories
+
+
 # Using Git
+
+### First Steps with Git
+
+- When starting with Git, there are a bunch of concepts that we need to learn to understand how things are organized and how files are tracked.
+
+- Remember when we said that a VCS can track who made which changes in a repository, for getting this work, we've to tell Git **who we're**. This can be done by using <code>git config</code> command then setting up the values of <code>user.email</code> and <code>user.name</code> to ur email and name, associated with ur **Github account** like this:
+```Bash
+# for email
+git config --global user.email "me@example.com"
+
+# for name
+git config --global user.name "My name"
+```
+
+- We use the <code>--global</code> flag to indicate that we want to use these values for all git repos that we'd use. We can also set different name and email values for different repos.
+
+- That being said, there are two ways to start working with a git repo: **(i)** we can initialize one from scratch in any directory using the <code>git init</code> command; **(ii)** we can clone a copy of a public repo that already exists somewhere else, using the <code>git clone</code> command:
+```Bash
+$ mkdir checks
+
+RITUKANTA@Ideapad MINGW64 ~/Desktop/git
+$ cd checks
+
+RITUKANTA@Ideapad MINGW64 ~/Desktop/git/checks
+$ git init
+Initialized empty Git repository in C:/Users/RITUKANTA/Desktop/git/checks/.git/
+```
+
+- After a proper installation of git bash, lunch its terminal to create empty directory **checks**. We receive a message after initializing git in a empty directory as:
+```Bash
+Initialized empty Git repository in /home/users/name/dir_name/xxxx/.git
+```
+
+- After initiating Git, a hidden directory is formed called <code>.git</code>. Hidden files and folders are listed using the <code>la</code> command.
+
+- We can also use <code>ls -l .git</code> command to look inside of it and see the different things it contains. This is known as Git directory. You can think of it as a database for ur repo that stores changes and changes history. .git contains a bunch of different files and folders. We won't touch any of these files directly, we'll always interact with them thru Git commands.
+
+
 # Module 1 Graded Assessment
