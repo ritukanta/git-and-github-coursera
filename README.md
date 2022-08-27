@@ -1,15 +1,17 @@
 **Introduction to Git and GitHub**<br>
 **Source** - [Git and GitHub](https://www.coursera.org/learn/introduction-git-github/)<br>
 Total duration - 4 Weeks<br>
-Total no. of Module Assessments - 4<br>
+Total no. of QwickLab Graded Labs - 4<br>
 <br>
+
+> Labs're fully instructional, and are encrypted.
 
 **Week 1: Intro to Version Control System or VCS**<br>
 1. [Course Intro](#course-intro)
 1. [Before Version Control](#before-version-control)
 1. [VCSs](#vcss)
 1. [Using Git](#using-git)
-1. [Module 1 Graded Assessment](#module-1-graded-assessment)
+1. [Module 1 Summary](#module-1-summary)
 <br>
 
 # Course Intro
@@ -22,14 +24,16 @@ Total no. of Module Assessments - 4<br>
 
 - **Instructor:** Kenny Sulaimon, Technical Program Manager for Android System Health and Velocity, Google.
 
-- **Pre-requisites:** Should've familiarity with a few basic operating system concepts like files, directories and file systems. U should also be familiar with basic <code>Linux</code> commands and basic syntax knowledge of <code>Python</code>, as we're going to use Pythpn script example throught this course. It is **super important** to know basic Linux commands that we're going to use. Without knowing them, u can't even learn any basics of Git.
+- **Pre-requisites:** Should've familiarity with a few basic operating system concepts like files, directories and file systems. U should also be familiar with basic <code>Linux</code> commands and basic syntax knowledge of <code>Python</code>, as we're going to use Pythpn script examples throught this course. It is **super important** to know the basic Linux commands that we're going to use. Without knowing them, u can't even learn any basics of Git.
 > - Have ur head around these Linux command line tools - https://github.com/ritukanta/Git-and-GitHub/tree/week-1/Linux-Commands
 
 ### Installation
 
 - For that, Python interpreter and Git Bash should've been installed on ur Machine. Though installing Python is pretty easy, u can follow any methods online, feel free to do that, I'll provide the complete installation method of <code>Git Bash</code>.
 
-- **For Linux and Distros:** If u are running on  a Linux distributions: Ubuntu, Fedora, Cent OS, Arch etc., u may have the package management system, u can use <code>apt</code>, <code>yum</code> package manager. Before that u should check whether <code>git</code> is installed already with the command called <code>git --version</code> on the terminal. If u get an error or a message that git version is older u can install the current git version by: <code>apt install git</code> or <code>yum install git</code> (<code>su</code>, or <code>root</code> users should use <code>su</code> commands. Umm u know if u know). Now, u are ready to use it. Here is the documentation: https://git-scm.com/download/linux .
+- **For Linux and Distros:** If u are running on Linux distributions: <code>Ubuntu</code>, <code>Fedora</code>, <code>CentOS</code>, <code>Red Hat Linux</code>, <code>Asianux</code>, <code>ClearOS</code>, <code>Oracle Linux</code>, <code>Amazon Linux 2</code>, <code>Berry Linux</code>, <code>SUSE Linux Enterprise</code>, <code>Vine Linux</code>, <code>Arch</code> and a ton more, u must have a package management system, u can use <code>apt</code>, <code>yum</code> package manager. Before that u should check whether <code>git</code> is installed already with the command called <code>git --version</code> on the terminal. If u get an error or a message that git version is older u can install the current git version by: <code>apt install git</code> or <code>yum install git</code> (<code>su</code>, or <code>root</code> users should use <code>su</code> commands. Umm u know if u know). Now, u are ready to use it. Here is the documentation: https://git-scm.com/download/linux .<br>
+> For more about Linux Distros - https://en.wikipedia.org/wiki/List_of_Linux_distributions
+
 ```Bash
 # For apt package manager
 apt install git
@@ -54,7 +58,7 @@ brew install git
 sudo port install git
 ```
 
-- **For Windows:** We're going to install Git on Windows, we'll dive into different options that u can select or u can and what they all mean. We'll start downloading the latest version of the software from https://gitforwindows.org/  or   https://git-scm.com/download/win . This software comes with <code>Bash Emulation Environment</code>, where we can run all the Git commands and a bunch of Linux and Unix commands. This bundle also includes a graphical user interface(UI) to interact with Git.
+- **For Windows:** We're going to install Git on Windows, we'll dive into different options that u can select or leave defaults and will know what they all mean. We'll start downloading the latest version of the software from https://gitforwindows.org/  or   https://git-scm.com/download/win . This software comes with <code>Bash Emulation Environment</code>, where we can run all the Git commands and a bunch of Linux and Unix commands. This bundle also includes a graphical user interface(UI) to interact with Git(Remember not all Linux commands line tools can be ran on Git bash: Using Linux distro is highly recommended).
 
 > - All right, we've downloaded the file, let's get installed now. After double clicking it or after running it as Adminstrator, the first window we get is the **License** of the software. Git is released under the <code>GPL version 2 license(GNU General Public License)</code>, which is a free software license.
 > - Accept the license and continue the setup. The very second window we get is installation path, keep it as is.
@@ -68,13 +72,13 @@ sudo port install git
 
 - It's super important to have detailed historical information of ur configuration files and source code u're working on. Git does that properly. It also provides the documentation of ur code history so that ur fellow coders or future collaborators can know why the change has been made, and how does it work.
 
-- Git stores the historical copies of ur code that helps to know what were the changes u made and also helps in reverting back if the latest changes have some bugs.
+- Git stores the historical copies of ur code that helps to know what were the changes u made and also helps in reverting back if the latest change is found to be buggy.
 
 ### Diffing Files
 
-- Say u've two files of some code and u want to check the difference between them, Checking difference means if there a few lines are added or removed from the previous file. What will u do to find the difference? Of course, u'll open those files using a text editor side by side and try to spot added lines or removed lines.
+- Say u've two files of some code and u want to check the difference between them, Checking difference means if there're a few lines added or removed from the previous file. What will u do to find the difference? Of course, u'll open those files using a text editor side-to-side and try to spot added lines or removed lines.
 
-- But it's just us, human eyes, take time to spot and understand the difference and tend to make mistakes in the way. Fortunately, there is a better way for computers, called <code>diff</code> command line tool. It takes two files and find the differences in a few formats. Let's check an example: we've two files, <code>rearrange1.py</code> and <code>rearrange2.py</code> which contain two different versions of the same function. We can see the content of the files using <code>cat</code> command: <code>cat rearrange1.py</code> and <code>cat rearrange2.py</code> and can find the difference but that won't be super obvious. So we have to use diff: <code>diff rearrange1.py rearrange2.py</code>, upon this command the result on the terminal is:
+- But it's just us, human eyes take time to spot and understand the difference and tend to make mistakes in the way. Fortunately, there is a better way for computers, called <code>diff</code> command line tool. It takes two files and find the differences in a few formats. Let's check an example: we've two files, <code>rearrange1.py</code> and <code>rearrange2.py</code> which contain two different versions of the same function. We can see the content of the files using <code>cat</code> command: <code>cat rearrange1.py</code> and <code>cat rearrange2.py</code> and can find the difference but that won't be super obvious. So we have to use diff: <code>diff rearrange1.py rearrange2.py</code>, upon this command the result on the terminal is:
 ```Bash
 $ diff rearrange1.py rearrange2.py
 7c7
@@ -83,7 +87,7 @@ $ diff rearrange1.py rearrange2.py
 >     result = re.search(r"^([\w .-]*), ([\w .-]*)$", name)
 ```
 
-- When we call the diff commmand, we get only the lines that are different between two files. In the above diff result, there 2 comparators: < and >. The <code><</code> tells us that this was removed and the <code>></code> tells that this line was added in second file. In simple words the old line got replaced by the new one. There is also a line called <code>7c7</code>: the first 7 indicates that it is the line number 7 from the first file and another 7, yeah u guessed it, it is from second file and <code>c</code> stands for <code>changed</code>. If there was a line that was added, <code>c</code> would be replaced by <code>a</code>, stands for <code>added</code>. For deletion, <code>d</code> is written in diff tool.
+- When we call the diff commmand, we get only the lines that are different between two files. In the above diff result, there're 2 comparators: < and >. The <code><</code> tells us that this line was removed and the <code>></code> tells that this line was added in second file. In simple words the old line got replaced by the new one. There is also a line called <code>7c7</code>: the first '7' indicates that it is the line number 7 from the first file and another '7', yeah u guessed it right, it is from second file and <code>c</code> stands for <code>changed</code>. If there was a line that was added, <code>c</code> would be replaced by <code>a</code>, stands for <code>added</code>. For deletion, <code>d</code> is written in diff tool.
 
 - For a better view of diff result, we use <code>diff -u old_file new_file</code>:
 ```Bash
@@ -101,7 +105,7 @@ $ diff -u *1.py *2.py
      return "{} {}".format(result[2], result[1])
 ```
 
-- In this unified format, we can better understand the contexts of the diff result. Here <code>-</code> sign is used for lines that were removed while <code>+</code> sign is used for lines that are added.
+- In this unified format, we can better understand the contexts of the diff result. Here <code>-</code> sign is used for lines that are removed while <code>+</code> sign is used for lines that are added.
 ```Bash
 # use diff -u in general
 diff -u old_file new_file
@@ -109,7 +113,7 @@ diff -u old_file new_file
 
 ### Applying Changes(Patching)
 
-- In the last one, we've seen how to see the difference using diff tool. Now we can store that diff value in a file. We do that by: <code>diff -u oldfile newfile > change.diff</code>. As a reminder, the greater than sign redirects the output of the diff command to a file called <code>change.diff</code>. This command save the file with extension .diff storing the diff result:
+- In the last one, we've seen how to see the difference using diff tool. Now we can store that diff value in a file. We do that by: <code>diff -u oldfile newfile > change.diff</code>. As a reminder, the greater than sign redirects the output of the diff command to a file called <code>change.diff</code>. This command saves the file with extension .diff storing the diff result:
 ```Bash
 $ cat change.diff
 --- rearrange1.py       2022-08-15 18:26:35.209332500 +0530
@@ -125,7 +129,7 @@ $ cat change.diff
      return "{} {}".format(result[2], result[1])
 ```
 
-- This diff file is really useful to patch differences to a new file. Suppose u got a new diff or patch file, and u need to apply the changes provided in that file to ur working file, for that use: <code>patch ur_file_name < file.diff</code> or <code>patch ur_file_name < file.patch</code>.
+- This diff file is really useful to patch differences to a new file. Suppose u got a new diff or patch file, and u need to apply the provided changes to ur working file, for that use: <code>patch ur_file_name < file.diff</code> or <code>patch ur_file_name < file.patch</code>.
 
 ### diff and patch Cheat Sheet
 
@@ -414,4 +418,60 @@ git log
 5. **Which command would we use to view pending changes?**<br>
 *ans.* git status
 
-# Module 1 Graded Assessment
+# Module 1 Summary
+- Following are the Git commands and tools learned in Module 1:
+```Bash
+# install git on Linux distros
+sudo apt install git
+
+# for MacOS with HomeBrew
+brew install git
+
+# Diff 2 files
+diff -u old_file new_file
+
+# Take diff output
+diff -u oldfile newfile > change.patch
+
+# Apply patch
+patch ur_file < change.patch
+
+# check Git version
+git --version
+
+# email and name configs globallly
+git config --global user.email "me@example.com"
+
+git config --global user.name "My Name"
+
+
+# Init a repo
+git init
+
+# Check inside folder
+ls -l .git
+
+# Stage by adding
+git add <file>
+
+# Unstage the staged
+git rm --cached <file>
+
+# Status of working tree
+git status
+
+
+# Commit changes
+git commit
+# or
+git commit -m "Commit Message"
+
+
+# Config details
+git config -l
+
+# Review repo history
+git log
+```
+
+> There's so much going on the earth and too much is yet to be learned;
