@@ -250,5 +250,168 @@ Initialized empty Git repository in /home/users/name/dir_name/xxxx/.git
 
 - We can also use <code>ls -l .git</code> command to look inside of it and see the different things it contains. This is known as Git directory. You can think of it as a database for ur repo that stores changes and changes history. .git contains a bunch of different files and folders. We won't touch any of these files directly, we'll always interact with them thru Git commands.
 
+- So whenever we clone a repo, the Git directory is copied to ur computer. And when we run <code>git init</code> to create a new repo like we just did, a new Git repo is initialized. The area outside the Git directory is called the <code>working tree</code>. The working tree is the current version of ur project.
+
+- The working tree will contain all files that are not added yet to the list of <code>track files</code>. Right now our working tree is empty. Suppose we copy a file called <code>disk_usage.py</code> to the working tree but it's currently untracked by Git. To make Git track our file, we'll use the <code>git add</code> command passing the file name as a parameter: **git add disk_usage.py**. With that done, we've added our file to the staging area. The <code>staging area</code> which is also known as the <code>index</code> is a file maintained by Git that contains all of the info about what files and changes are going to be changed in ur next commands.
+
+- We can use the <code>git status</code> command to get info about the current working tree and pending changes. U can utilize these commands on ur own. Try it, it works. For working tree of tracked files, git status output be like:
+```Bash
+# git status before adding the file to staging area 
+$ git status
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        disk_usage.py
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+
+# git add <file>
+$ git add disk_usage.py
+
+
+# git status after adding the file to track files
+$ git status
+On branch main
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   disk_usage.py
+```
+
+- We can see that our new file is yet to be <code>committed</code>, this means our change is currently in the staging area. To get it committed, the <code>git commit</code> command is used. This command opens a text editor where u need to write a <code>commit message</code>. You can select ur prefered editor while installing the git bash. Let's enter a simple description of what we did and that the change to be committed is the <code>new file</code> we recently staged or git added. That's being done, we've created our first ever commit.
+
+### Tracking Files
+
+- So far we got to know that a Git repository consists of: <code>the Git directory(.git)</code>, <code>the working tree</code> and <code>the staging area</code>. The Git directory contains the history of all the files and changes. The working tree has the staged and committed files and the staging area contains the changes that have been marked to be included in the very next commit, we're going to do.
+
+- Each time we make a commit, Git stores a new snapshot of the state of ur current version of ur project. Combining these snapshots, history of ur repo is formed that get stored in the Git directory.
+
+- Each file or directory in our working tree can either be <code>tracked</code> or <code>untracked</code>. And each track file may be one of the three states: <code>staged</code>, <code>modified</code>, or <code>committed</code>.
+
+- If a file is in modified state, it clearly means that we've made changes to it. It is possible that this file was staged or committed with a different snapshot before we made the modification. This modification can be adding, modifying or deleting the file content. Git notices everytime we make a change to our file, won't store any changes until we add it to the <code>staging area</code>.
+
+- So the next step is to stage previous chnages. after staging, the changes to those files become ready to be committed. To unstage a staged file, we can use: <code>git rm --cached < file ></code>.
+```Bash
+# Initialize Git in a directory
+git init
+
+# Clone a repo to the local machine
+git clone <git-repo-url>
+
+# check working tree status
+git status
+
+# Stage or add 
+git add <file>
+
+# Commit staged files
+git commit
+
+
+
+
+# Upon 'git commit' command, ur default text editor opens and seems the following:
+  GNU nano 6.4                                                                C:/Users/RITUKANTA/Desktop/git/checks/.git/COMMIT_EDITMSG                                                                 Modified
+
+Added disk_usage.py
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+#
+# Initial commit
+#
+# Changes to be committed:
+#       new file:   disk_usage.py
+#
+
+
+
+
+# Unstage the staged file
+git rm --cached <file>
+```
+
+### Basic Git Workflow
+
+- As we got to know we can't stage or commit a change until git is initiated. To checkout the current configuration by using <code>git config -l</code>, the following output is found:
+```Bash
+$ git config -l
+diff.astextplain.textconv=astextplain
+filter.lfs.clean=git-lfs clean -- %f
+filter.lfs.smudge=git-lfs smudge -- %f
+filter.lfs.process=git-lfs filter-process
+filter.lfs.required=true
+http.sslbackend=openssl
+http.sslcainfo=C:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt
+core.autocrlf=input
+core.fscache=true
+core.symlinks=true
+core.fsmonitor=true
+core.editor=nano.exe
+pull.rebase=false
+credential.helper=manager-core
+credential.https://dev.azure.com.usehttppath=true
+init.defaultbranch=main
+user.email=reddyritukanta1925@gmail.com
+user.name=ritukanta
+filter.lfs.clean=git-lfs clean -- %f
+filter.lfs.smudge=git-lfs smudge -- %f
+filter.lfs.process=git-lfs filter-process
+filter.lfs.required=true
+core.longpaths=true
+core.repositoryformatversion=0
+core.filemode=false
+core.bare=false
+core.logallrefupdates=true
+core.symlinks=false
+core.ignorecase=true
+```
+
+- There is a bunch of info but we won't cover all of it. Pay special attention to the <code>user.email</code> and <code>user.name</code> lines, which we've touched on briefly previously. This info will apper in commit logs if u are using a shared or public repo.
+
+- Calling git commit with no parameters launches a text editor, to enter a commit message. In case u didn't notice that in the editor lines starting a hash(#) are not going to be included in the commit message. And we need to add new lines in order to show additional info about ur commit. But commit a change without even open a text editor, we need to use the <code>-m</code> flag followed by the short commit message between double quotes.
+```Bash
+# Commit with '-m' flag
+git commit -m "Commit Message"
+
+# Git config info:
+git config -l
+
+
+# to view commit history
+git log
+```
+
+### Anatomy of a Commit Message
+
+- Writting a clear informative commit message is super significant when using a VCS, future you or other contributors who might read the commit message and find it contextually informative. So how does a good commit look like?
+
+- A commit message is generally broken into a few sections. The first line is short summary of the commit followed by a blank line. And this is followed by full description of the changes with details.
+
+### Practice Quiz: Using Git
+
+1. **Before changes in new files can be added to the Git directory, what command will tell Git to track our file in the list of changes to be committed?**<br>
+*ans.* git add
+
+2. **Which command would we use to review the commit history for our project?**<br>
+*ans.* git log
+
+3. **What command would we use to make Git track our file?**<br>
+*ans.* git add
+
+4. **Which command would we use to look at our config?**<br>
+*ans.* git config -l
+
+5. **Which command would we use to view pending changes?**<br>
+*ans.* git status
 
 # Module 1 Graded Assessment
