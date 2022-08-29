@@ -105,20 +105,127 @@ Date:   Sat Aug 27 07:47:00 2022 +0530
 
 - Say there are files named 01.txt, 02.sh, 03.c, 04.cpp, 05.py, 06.java, 07.html, 08.css, 09.js, 010.kt, 011.prop, 012.h, 013.mk. To ignore them all, what would you do? Add thier names one by one? Just add 0*
 
+### Practice Quiz: Advanced Git Interaction
 
+1. **Which of the following commands is NOT an example of a method for comparing or reviewing the changes made to a file?**<br>
+(i) git log -p<br>
+(ii) git diff --staged<br>
+(iii) git add -p<br>
+(iv) git mv<br>
+*ans.* git mv
 
+2. **What is the gitignore file?**<br>
+*ans.* A file containing a list of files or filename patterns for Git to skip for the current repo.
 
+3. **What kind of files will the command git commit -a not commit?**<br>
+*ans.* New files
 
+4. **What does HEAD represent in Git?**<br>
+*ans.* The currently checked-out snapshot of ur project
 
-
-
-
-
-
-
-
+5. **If we want to show stats about changes in a commit, like which files were changed and how many lines were added or removed, what flag should we add to git log?**<br>
+*ans.* --stat
 
 # Undoing Things
+
+### Undoing Changes Before Committing
+
+- Being able to revert any changes we made is of the most powerful features offered by VCSs. There's a bunch of different techniques available. Sometimes u might find urself in a situation where you've made a bunch of changes to a file but u decided to roll back. This can be done using the <code>git checkout</code> command, followed by name of that file. Keep in mind, this command works for unstaged and modified files.
+```Bash
+# Discard a change for a unstaged file
+git checkout <file>
+```
+
+- What if u added some changes to the staging area already> Don't regret, there's a way. We can unstage our changes by using the <code>git reset</code>, followed by **HEAD** then the file name.
+```Bash
+# Reset a staged file
+git reset HEAD <file>
+```
+
+- By summarizing it, we can say that to revert a unstaged file, git checkout is used while to unstage a staged one, we can use git reset.
+
+### Amending Changes
+
+- In general, we try to make sure our commits include all the right changes as we intend. But we're all human and we make mistakes. It's not uncommon for us or even a IT specialist to realize that there's something wrong in a recent commit. For example, you had to commit two different files for the same change but unintentionally u staged and committed the first file and left the other one, or may be ur commit context is correct but found that ur commit message isn't that descriptive enough. We can solve such problems using the <code>--amend</code> flag with git commit command.
+
+- When we run **git commit --amend**, Git takes whatever is currently in our staging area and run the commit workflow to overwrite the latest or recent commit. Let's understand this with an example. We'll create a new directory and initiate a Git first:
+```Bash
+# Initialize Git
+$ git init
+Initialized empty Git repository in C:/Users/RITUKANTA/Desktop/git-amend/.git/
+```
+Let's create three files called <code>favorite_foods.log</code>, <code>food_count.py</code>, and <code>food_question.py</code>. I am adding the first file favorite_foods.log in intial commit and will learn how to amend with other two files.
+```Bash
+# Addedd 3 files, so let's check status
+$ git status
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        favorite_foods.log
+        food_count.py
+        food_question.py
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+
+
+
+# Stage the favorite_foods.log file
+$ git add favorite_foods.log
+
+
+
+# Commit
+$ git commit -m "Added favorite_foods.log file which contains list of food items"
+[main (root-commit) 8f0c6f3] Added favorite_foods.log file which contains list of food items
+ 1 file changed, 100 insertions(+)
+ create mode 100644 favorite_foods.log
+
+
+# Check again
+$ git status
+On branch main
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        food_count.py
+        food_question.py
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+
+# Check agai after staging the food_count.py file
+$ git status
+On branch main
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   food_count.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        food_question.py
+
+
+# Commit for two files but actually one is committted
+$ git commit -m "Added two scripts"
+[main 2c1febb] Added two scripts
+ 1 file changed, 53 insertions(+)
+ create mode 100644 food_count.py
+
+
+
+
+# Let's fix it
+# Stage the food_question.py file too and run "git commit --amend"
+# Text editor window will open, where u can edit the commit message and add extra info about ur chage
+[main f109ad4] Added two scripts
+ Date: Mon Aug 29 19:32:52 2022 +0530
+ 2 files changed, 85 insertions(+)
+ create mode 100644 food_count.py
+ create mode 100644 food_question.py
+```
 
 # Branching and Merging
 
