@@ -35,6 +35,89 @@ Date:   Sat Aug 27 07:47:00 2022 +0530
 
 ### Getting More Info About Our Changes
 
+- By default, git log command prints the commit message, the author, and the date. But to see the actual lines changed in each commit. To do this, with git log we can use <code>-p</code> flag. The p comes from patch, because using this flag gives us the patch that was created, similarly like in <code>diff -u</code>.
+
+- The <code>git log -p</code> shows added lines with plusses and removed lines with dashes. Because the amount of text is now longer than what fits on ur screen, Git automatically uses a paddiing tool that allows us to scroll using page up, page down, and the arrow keys.
+
+- If u want to the changes made in a certain commit, another option to use the <code>git show</code> followed by the commit ID as parameter. This will display the info about the commit and associated patch. The <code>Commit ID</code> can be found after term commit in the output of git log.
+
+- The <code>--stat</code> flag is also used with git log to show some stats of the commit, like which files were changed and how many lines were added or removed.
+
+- Before doing a commit, you need to make sure that the changes u made are correct and it works. It's natural that by the time you get to the commit step you don't really remember everything u changed. To help us track, Git gives us the <code>git diff</code> command. Again this format is equivalent to the diff -u output.
+
+- If our change is bigger and includes several files, we can pass a file by parameter to see the differences relevant to that specific file instead of all the files at the same time.
+
+- We can also use the <code>git add</code> with command with the <code>-p</code> flag, when we use this flag git will show us the changes or patches being added and ask us if we want to change it or not. This way this can be detected if there's any changes that we don't want to stage that at all. Useful right? However if we call git diff again after staging the files included in the change, it won't show any differences since git diff shows only unstaged files by default. Instead, we can call <code>git diff --staged</code> to see the diff changes that are staged but not committed.
+
+### Deleting and Renaming Files 
+
+- Let's say that you've decided to clean up some old scripts and want to remove them from your repository, you can delete track files from a repo using the <code>git rm</code> command, followed by name as the file name as parameter: <code>git rm < file ></code>. This will stop the file from being tracked by Git and delete it from the working tree. Likewise, <code>git rm -r folder</code> is used for for removing obsolete directories from the working tree.
+
+- File removals also go thru the same general Git workflow: remove, commit.  We have to write a commit message, why we've deleted them. As usual, we get a bunch of stats when we do the commit.
+
+- You can use the <code>git mv</code> command to rename files in the repos. Then the git status will show us that the file was remamed and clearly display the old and new names. As the previous example, the change is staged but not committed, you've to commit. The git mv command  works in a similar way to the <code>mv</code> command on Linux and so can be used for both moving and renaming. The git status shows us which files have tracked or untracked changes, and which files were added, modified, deleted or renamed.
+
+- If we've a long list of untracked tiles, we might lose an important change in the noise, or uwanted files that we don't want in our repo. To make them ignored by git status, we can the <code>.gitignore</code> file. To create it, we can use <code>touch</code> or <code>nano</code>, and add the target file names, extensions so that they well be ignored successfully. For example, if we're working on a repo, in which a bunch of log files are created by the project scripts, and we need to ignore them and won't include in our work. So we've to specify *.log inside the .gitignore, like this:
+```Bash
+  GNU nano 6.4                                                                                        .gitignore                                                                                       Modified
+
+*.logs/
+```
+
+- There's a number of rules how to use gitignore. After using creating and using <code>.gitignore</code>, we need to stage and commit it like other files, we did in the basic Git workflow.
+
+### Advanced Git Cheat Sheet
+
+- **git commit -a** - Stages and commits the modified track files and doesn't work on new files
+
+- **git log -p** - Commit history with detailed Patch text of eah commit
+
+- **git show commit-ID** - Log patch of a certain commit
+
+- **git diff** - Similar to "diff -u", works for untracked files
+
+- **git diff --staged** - Works for staged files, but not committed
+
+- **git add -p** - Patches being added and whether to actually stage
+
+- **git rm** - Removes track files or folders
+
+- **git mv** - Renames or moves tracked files or folders to new names or other directories respectively
+
+#### Git Ignore
+
+- To ignore all files with extension .log add <code>*.log</code>
+- To ignore a directory named temp (example)add **temp/**
+
+- Lines start with <code>#</code> in .gitignore will be ignored, so u can use # for commenting in .gitignore
+
+- For a certain file in directory use /Dirname/filename, such as /temp/*.log, /bin/adb.log etc
+
+- Suppose u have multiple folders named libs and want to ignore then use **/lib to ignore all /lib filders
+
+- Use /lib/**/name, to ignore /lib/test/name/ and like that folders
+
+- Use name[abc].file to ignore files named /namea.file, nameb.file and name.file. it won't ignore named.file or namex.file etc
+
+- Use name[!abc].file to ignore all files with nameXXX.file except namea.file  nameb.file   namec.file
+
+- Name/!*.log - this will ignore all files of folder name but not the *.log files
+
+- Say there are files named 01.txt, 02.sh, 03.c, 04.cpp, 05.py, 06.java, 07.html, 08.css, 09.js, 010.kt, 011.prop, 012.h, 013.mk. To ignore them all, what would you do? Add thier names one by one? Just add 0*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Undoing Things
 
 # Branching and Merging

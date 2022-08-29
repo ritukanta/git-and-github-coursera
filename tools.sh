@@ -33,3 +33,21 @@ git rm <file>
 
 # Rename a staged file
 git mv <file>
+
+# Discard the change before staging
+git checkout <file>
+
+# Reset the change after staging
+git reset HEAD <file>
+
+# Amend
+git commit --amend
+
+# Undo a commit
+git revert <commit ID>
+
+# Revert the latest commit
+git revert HEAD
+
+
+# Create a branch
