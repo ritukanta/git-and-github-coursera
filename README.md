@@ -227,6 +227,91 @@ $ git commit -m "Added two scripts"
  create mode 100644 food_question.py
 ```
 
+- An important heads up, while **amending** is okay for fixing local commits, you shouldn't use it on public commits present in a public repo. This is because using <code>--amend</code> rewrites the Git history removing the latest commit and replacing it with new amended one. This can lead to some confusing situations when working with other people and should definitely be avoided.
+
+### Roll Back
+
+- Think of it as, you're receiving repetitive tickets that the last commit you made, has made the script broken and your colleuges are having hassles with it. Make your head spin around it, it's rollback time!
+
+- A bad commit can be rolled back by using the <code>git revert</code> command. The **git revert** command doesn't just undo, instead it newly creates a commit that includes all the inverses of that bad commit. If particular lines are added in a commit, then the same lines will be deleted in its reverted commit. We've to use the <code>HEAD</code> alias to use git revert for the most recent commit: <code>git revert HEAD</code>. This represents a text editor commit interface, where Git add somelines automatically in order to describe why the roll back is performed, though you can add your own text here. Little did you know, the **git revert HEAD** reverts the last commit ony.
+
+### Identifying a Commit
+
+- We've used the head alias with the git revert command for the most recent commit in our Git history. But the errors may take a while to be detected and it is possible that the bad commit may not be the most recent. So we need target a specific commit using its **commit ID**. Commit IDs show up when we run the **git log** command, appear right after the word 'commit'.
+
+- A **40 characters long** commit ID is made up of letters and integers. The commit ID hash is calculated using a **Cryptographic** algorithm called <code>SHA1</code>. This algorithm takes the Git commit data as input and produces a 40 characters string as the output. Git doesn't use these hashes for security reasons. Instead, they're used to **guarantee for consistency of our Git repo**. Having consistent data means getting exactly what was expected.
+```
+                  "You can verify the data you get back out is the exact same data you put in."
+                                                                                                
+                                                                            - Linus Torvalds
+```
+
+- The chance of two different commits generating the same hash is extremely the smallest. Remember, using **--amend** with the git commit re-generates a new commit ID hash, this is why it's not a good practice amending when working on a public repo.
+
+- So to rollback a certain commit which exists in our repo history, we can use the <code>git revert commit-ID</code> command. It is not necessary to always use the total 40 characters for a commit, this can also be done by using the first **five** or **eight** characters. Think of it as, we have a commit with ID <code>a30c52cd4f189ae632b8013ba08093a9472d86eb</code> and we've to revert it, we can do this as: **git revert a30c5**.
+
+### Practice Quiz: Undoing Things
+
+1. **Let's say we've made a mistake in our latest commit to a public branch. Which command will be the best for fixing our mistake?**<br>
+*ans.* git revert
+
+2. **If we want to roll back a commit on a public branch that wasn't the most recent one using the revert command. What must we do?**<br>
+*ans.* Use the commit ID at the end of the git revert command
+
+3. **What does Git use Cryptographic hash keys for?**<br>
+*ans.* To guarantee the consistency of our repository
+
+4. **What does the git commit --amend command do?**<br>
+*ans.* Overwrite the previous message
+
+5. **How can we easily view the log message and diff output of the latest commit if we don't know the commit ID?**<br>
+*ans.* git show HEAD
+
 # Branching and Merging
+
+### What is a Branch?
+
+- Branches are an important part of the Git workflow. In Git, a branch at the most basic level is just a pointer to a certain commit. It represents an independent line of development in a project. The default branch that Git creates for us when a repository initialized is called <code>master</code>.
+
+- Branches make it really easy to experiment with new ideas and projects. When you want to add a new feature or fix something, you can create a new branch and start developing there. You can also <code>merge</code> back into the **master** branch whenever you want. You can create many as many branhes as per your project workflow without affecting the master branch.
+
+### Creating New Branches
+
+- We can use the **git branch** commands to list, create, delete, and manipulate branches in our repo. Running <code>git branch</code> by itself will show you a list of all branches in your repo. By default there's only one branch master, so a new branch can be created by: <code>git branch branch-name</code>. Even after creating the new branch, we're still working on the master, so to switch to the new one and work on it, we use: <code>git checkout branch-name</code>.
+
+- It might seem bit confusing at first, but to master on these commands, you need to practice on your own as far as possible. First off, we've created and switched to our new branch. But we can do this by using a single command: <code>git checkout -b branch-name</code>. This will create the branch as you named it and switch to it as well.
+
+- When you create a new branch and do new commits in it, the commit history will be stored in that branch, so that you can work on different branches independently.
+
+### Working with Branches
+
+- When we again switch to the master branch using **git checkout master**, under the hood, Git changes where head is pointing. The commits of that new branch will not show up in the master branch history. Remember that when we switch branches, git will also changes files in our working tree to whatever snapshot head is currently pointing at.
+
+- One thing to note after all this back and forth, is that each branch is just a pointer to a certain commit is a series of snapshots. When we switch to another branch, we checkout a different commit and Git updates both head and the contents of our working tree.
+
+- We can delete a branch using the <code>git branch -d</code> command followed by the branch name. But if there're changes in the branch and that haven't been merged back yet into master, we'll receive an error. To force delete that branch, we can use <code>git branch -D branch-name</code>.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Module 2 Summary

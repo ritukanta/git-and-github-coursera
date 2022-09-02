@@ -9,6 +9,11 @@ git commit -a -m "Commit Message"
 # Git log with details, "p" stands for Patch
 git log -p
 
+
+# Show the most recent commit patches
+git show HEAD
+
+
 # Individual Git logs
 git show <commit ID>
 
@@ -50,4 +55,20 @@ git revert <commit ID>
 git revert HEAD
 
 
-# Create a branch
+# List branches
+git branch
+
+# Create a new branch
+git branch new-branch-name
+
+# Switch branches
+git checkout branch-name
+
+# Create and switch at once
+git checkout -b branch-name
+
+# Delete a branch
+git branch -d branch-name
+
+# Force delete a branch
+git branch -d branch-name
