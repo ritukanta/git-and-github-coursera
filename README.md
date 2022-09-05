@@ -291,27 +291,151 @@ $ git commit -m "Added two scripts"
 
 - We can delete a branch using the <code>git branch -d</code> command followed by the branch name. But if there're changes in the branch and that haven't been merged back yet into master, we'll receive an error. To force delete that branch, we can use <code>git branch -D branch-name</code>.
 
+### Merging
 
+- A typical workflow for managing branches in Git is to create a new separate branch for developing any new features or changes. Once the new feature is in good shape, we can merge the separate branch to the main. Merging in Git combines branch data and commit history together. For that, we use the <code>git merge</code> followed by the separate branch name.
 
+- Git merging performs in two different algorithms: <code>fast-forward</code> and <code>three-way</code> merge. Fast-forward merging when all commits in the checked out branch are also in the branch being merged. In such cases, Git just updates the pointers of the branches of the same commit. On the other hand, a three-way merge is performed when the history of the branches has diverged in someway, and there isn't nice linear path to combine then via fast-forwarding.
 
+### Merge Conflicts
 
+- If the branches we're trying to merge have edits to the same part of a file, then it will lead to a **merge conflict**. Git stops automatic merge when there's a conflict. When we see the pending changes after a merge conflict using git status, it shows up a lot of information. The files causing the conflict would be shown as modified files, and it is also possible that some of files would be marked as staged as they might not have conflicted edits. You can even change your mind and abort the merge operation by using: <code>git merge --abort</code>.
 
+- But for a successful merge, we've to edit and fix conflicts of the modified files, using a text editor. When you open a conflicted file you can identify the error parts of your code as <code><<<<<<<<<<<<<<<<< HEAD</code>, <code>===============</code> and <code>>>>>>>>>>>>>>>>>>> branch-name</code>. You've to delete such conflict dividers, and re-edit your code if needed. Now you can stage those files by using git add, and then you just need to call git commit or <code>git merge --continue</code>, to wrap up the merge. But the comments when committing shows us look different than a usual commit because this is merge commit.
 
+- Now to see what our commit history looks like, we can use the git log with the <code>--graph --oneline</code> for seeing the commits as graph and one line per commit.
 
+### Practice Quiz: Branching and Merging
 
+1. **When we merge two branches, one of the two algorithms is used. If the branches have divirged, which algorithm is used?**<br>
+*ans.* Three-way merge
 
+2. **The following code snippet represents the result of a merge conflict. Edit the code to fix the conflict and keep the version represented by the current branch.**<br>
+```Python
+<<<<<<<<<HEAD
+print("Keep me!")
+==========
+print("No, keep me instead!")
+>>>>>>>>new-feature
+```
+*ans.*
+```Python
+print("Keep me!")
+```
 
+3. **What command would we use to throw away a merge and start over?**<br>
+*ans.* git merge --abort
 
+4. **How do we display a summarized view of commit history for a repo, showing one line per commit?**<br>
+*ans.* git log --graph --oneline
 
+5. **The following script contains the result of a merge conflict. Edit the code to fix the conflict, so that both versions are included.**
+```Python
+def main():
+<<<<<<< HEAD
+    print("Start of program>>>>>>>")
+=======
+    print("End of program!")
+>>>>>>> improvement-to-the-code
 
+main()
+```
+*ans.*
+```Python
+def main():
+    print("Start of program>>>>>>>")
+    print("End of program!")
 
-
-
-
-
-
-
-
-
+main()
+```
 
 # Module 2 Summary
+- Commands and tools we've learned so far:
+```Python
+#! /usr/bin/bash
+
+# Module 2
+# Skip the staging area:
+git commit -a -m "Commit Message"
+# But remember we can not commit new file with "-a"
+
+
+# Git log with details, "p" stands for Patch
+git log -p
+
+
+# Show the most recent commit patches
+git show HEAD
+
+
+# Individual Git logs
+git show <commit ID>
+
+# Git log with Stats
+git log --stat
+
+# Diff for unstaged and modified files
+# for all
+git diff
+# for a certain file
+git diff <file>
+
+
+# Stage modified files
+git add -p
+
+# Diff for staged files, this will ask whether u want to commit or not. This helps when u are not sure if u want stage a change
+git diff --staged
+
+# Remove a staged file
+git rm <file>
+
+# Rename a staged file
+git mv <file>
+
+# Discard the change before staging
+git checkout <file>
+
+# Reset the change after staging
+git reset HEAD <file>
+
+# Amend
+git commit --amend
+
+# Undo a commit
+git revert <commit ID>
+
+# Revert the latest commit
+git revert HEAD
+
+
+# List branches
+git branch
+
+# Create a new branch
+git branch new-branch-name
+
+# Switch branches
+git checkout branch-name
+
+# Create and switch at once
+git checkout -b branch-name
+
+# Delete a branch
+git branch -d branch-name
+
+# Force delete a branch
+git branch -D branch-name
+
+# Merge
+git merge branch-name
+
+# Cancel merging
+git merge --abort
+
+# Continue merge after resolving sonflicts
+git merge --continue
+
+# Git log as graph, and one line per commit
+git log --graph --oneline
+```

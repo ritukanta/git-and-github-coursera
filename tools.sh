@@ -71,4 +71,16 @@ git checkout -b branch-name
 git branch -d branch-name
 
 # Force delete a branch
-git branch -d branch-name
+git branch -D branch-name
+
+# Merge
+git merge branch-name
+
+# Cancel merging
+git merge --abort
+
+# Continue merge after resolving sonflicts
+git merge --continue
+
+# Git log as graph, and one line per commit
+git log --graph --oneline
