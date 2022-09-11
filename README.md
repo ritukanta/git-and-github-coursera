@@ -12,24 +12,24 @@
 - Create here - https://github.com/ <br>
   <br>
 
-![GitHub](../Week-3/Images/Screenshot-1.png)
+![GitHub](../week-3/Images/Screenshot-1.png)
 
 ### Basic Interaction with GitHub
 
 - After generating an account on GitHub, we'll create a brand new repo, going step-by-step: we'll start by clicking the <code>New</code>, like this:<br>
   <br>
 
-![New](../Week-3/Images/Screenshot-3.png)
+![New](../week-3/Images/Screenshot-3.png)
 
 - The next window will be the repo creation wizard and the wizard is pretty straightforward. You can go through step-by-step like this:<br>
   <br>
 
-![Repo Creation Wizard](../Week-3/Images/Screenshot-4.png)
+![Repo Creation Wizard](../week-3/Images/Screenshot-4.png)
 
 - Here you can name a new repo name, add description to it, set the repo as private or public, initialize with a README, a gitignore and a license file. After this, the newly created repo will be look like this:<br>
   <br>
 
-![Remote Repo](../Week-3/Images/Screenshot-5.png)
+![Remote Repo](../week-3/Images/Screenshot-5.png)
 
 - Now we are ready to clone this repo into our computer, by calling <code>git clone</code> followed by the repo URL: <code>git clone https://github.com/[username]/[repo_name].git</code>. It will download a copy of this repo to our machine, this means that we can perform all the git actions and operations that we've learned up till now. If you are using Git Bash, the **git clone** command may ask you a authentication on GitHub to use your account, and if you are using a Virtual Machine or Linux based distro, it will ask the associated account username and password. But putting password will deny because you should use <code>Personal access token</code> instead of account password, create Personal access account here - https://github.com/settings/tokens. For more refer - https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/.
 
