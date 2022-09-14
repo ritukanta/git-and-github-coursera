@@ -7,6 +7,13 @@
 
 # Advanced Git Interaction
 
+1. [Intro to Module 2](#intro-to-module-2)
+1. [Skipping the Staging Area](#skipping-the-staging-area)
+1. [Getting More info about our Changes](#getting-more-info-about-our-changes)
+1. [Deleting and Renaming Files](#deleting-and-renaming-files)
+1. [Advanced Git Cheat Sheet](#advanced-git-cheat-sheet)
+1. [Practice Quiz](#practice-quiz-advanced-git-interaction)
+
 ### Intro to Module 2
 
 - In this module, we'll feel the true power of Git by seeing how we can undo some of our changes. The ability to revert previous changes is one of the most useful aspects of a VCS. We can discard the changes made to a file, fix a commit that was incorrect and even roll back our repo to an older snapshot.
@@ -20,6 +27,7 @@
 - At first, you might think that git commit <code>-a</code> is just a shortcut for git add followed by git commit but that's not exactly true. Git commit -a doesn't work on new files because those are untracked. Instead, git commit -a is a shortcut to stage any changes to tracked files and commit them in one step. If the modified file has never been committed to the repo, we will still have to use git add to track it first.
 
 - However, using a shortcut like <code>-a</code> is just like the regular commit workflow. The commit will show up in the log along the with the commit message just as usual.
+
 ```Bash
 $ git log
 commit 46df7ea07d5222f97e1bf6c719ce479d51811d6d (HEAD -> week-1, origin/week-1)
@@ -49,15 +57,16 @@ Date:   Sat Aug 27 07:47:00 2022 +0530
 
 - We can also use the <code>git add</code> with command with the <code>-p</code> flag, when we use this flag git will show us the changes or patches being added and ask us if we want to change it or not. This way this can be detected if there's any changes that we don't want to stage that at all. Useful right? However if we call git diff again after staging the files included in the change, it won't show any differences since git diff shows only unstaged files by default. Instead, we can call <code>git diff --staged</code> to see the diff changes that are staged but not committed.
 
-### Deleting and Renaming Files 
+### Deleting and Renaming Files
 
 - Let's say that you've decided to clean up some old scripts and want to remove them from your repository, you can delete track files from a repo using the <code>git rm</code> command, followed by name as the file name as parameter: <code>git rm < file ></code>. This will stop the file from being tracked by Git and delete it from the working tree. Likewise, <code>git rm -r folder</code> is used for for removing obsolete directories from the working tree.
 
-- File removals also go thru the same general Git workflow: remove, commit.  We have to write a commit message, why we've deleted them. As usual, we get a bunch of stats when we do the commit.
+- File removals also go thru the same general Git workflow: remove, commit. We have to write a commit message, why we've deleted them. As usual, we get a bunch of stats when we do the commit.
 
-- You can use the <code>git mv</code> command to rename files in the repos. Then the git status will show us that the file was remamed and clearly display the old and new names. As the previous example, the change is staged but not committed, you've to commit. The git mv command  works in a similar way to the <code>mv</code> command on Linux and so can be used for both moving and renaming. The git status shows us which files have tracked or untracked changes, and which files were added, modified, deleted or renamed.
+- You can use the <code>git mv</code> command to rename files in the repos. Then the git status will show us that the file was remamed and clearly display the old and new names. As the previous example, the change is staged but not committed, you've to commit. The git mv command works in a similar way to the <code>mv</code> command on Linux and so can be used for both moving and renaming. The git status shows us which files have tracked or untracked changes, and which files were added, modified, deleted or renamed.
 
-- If we've a long list of untracked tiles, we might lose an important change in the noise, or uwanted files that we don't want in our repo. To make them ignored by git status, we can the <code>.gitignore</code> file. To create it, we can use <code>touch</code> or <code>nano</code>, and add the target file names, extensions so that they well be ignored successfully. For example, if we're working on a repo, in which a bunch of log files are created by the project scripts, and we need to ignore them and won't include in our work. So we've to specify *.log inside the .gitignore, like this:
+- If we've a long list of untracked tiles, we might lose an important change in the noise, or uwanted files that we don't want in our repo. To make them ignored by git status, we can the <code>.gitignore</code> file. To create it, we can use <code>touch</code> or <code>nano</code>, and add the target file names, extensions so that they well be ignored successfully. For example, if we're working on a repo, in which a bunch of log files are created by the project scripts, and we need to ignore them and won't include in our work. So we've to specify \*.log inside the .gitignore, like this:
+
 ```Bash
   GNU nano 6.4                                                                                        .gitignore                                                                                       Modified
 
@@ -86,57 +95,65 @@ Date:   Sat Aug 27 07:47:00 2022 +0530
 
 #### Git Ignore
 
-- To ignore all files with extension .log add <code>*.log</code>
+- To ignore all files with extension .log add <code>\*.log</code>
 - To ignore a directory named temp (example)add **temp/**
 
 - Lines start with <code>#</code> in .gitignore will be ignored, so u can use # for commenting in .gitignore
 
-- For a certain file in directory use /Dirname/filename, such as /temp/*.log, /bin/adb.log etc
+- For a certain file in directory use /Dirname/filename, such as /temp/\*.log, /bin/adb.log etc
 
-- Suppose u have multiple folders named libs and want to ignore then use **/lib to ignore all /lib filders
+- Suppose u have multiple folders named libs and want to ignore then use \*\*/lib to ignore all /lib filders
 
-- Use /lib/**/name, to ignore /lib/test/name/ and like that folders
+- Use /lib/\*\*/name, to ignore /lib/test/name/ and like that folders
 
 - Use name[abc].file to ignore files named /namea.file, nameb.file and name.file. it won't ignore named.file or namex.file etc
 
-- Use name[!abc].file to ignore all files with nameXXX.file except namea.file  nameb.file   namec.file
+- Use name[!abc].file to ignore all files with nameXXX.file except namea.file nameb.file namec.file
 
-- Name/!*.log - this will ignore all files of folder name but not the *.log files
+- Name/!_.log - this will ignore all files of folder name but not the _.log files
 
-- Say there are files named 01.txt, 02.sh, 03.c, 04.cpp, 05.py, 06.java, 07.html, 08.css, 09.js, 010.kt, 011.prop, 012.h, 013.mk. To ignore them all, what would you do? Add thier names one by one? Just add 0*
+- Say there are files named 01.txt, 02.sh, 03.c, 04.cpp, 05.py, 06.java, 07.html, 08.css, 09.js, 010.kt, 011.prop, 012.h, 013.mk. To ignore them all, what would you do? Add thier names one by one? Just add 0\*
 
 ### Practice Quiz: Advanced Git Interaction
 
 1. **Which of the following commands is NOT an example of a method for comparing or reviewing the changes made to a file?**<br>
-(i) git log -p<br>
-(ii) git diff --staged<br>
-(iii) git add -p<br>
-(iv) git mv<br>
-*ans.* git mv
+   (i) git log -p<br>
+   (ii) git diff --staged<br>
+   (iii) git add -p<br>
+   (iv) git mv<br>
+   _ans._ git mv
 
 2. **What is the gitignore file?**<br>
-*ans.* A file containing a list of files or filename patterns for Git to skip for the current repo.
+   _ans._ A file containing a list of files or filename patterns for Git to skip for the current repo.
 
 3. **What kind of files will the command git commit -a not commit?**<br>
-*ans.* New files
+   _ans._ New files
 
 4. **What does HEAD represent in Git?**<br>
-*ans.* The currently checked-out snapshot of ur project
+   _ans._ The currently checked-out snapshot of ur project
 
 5. **If we want to show stats about changes in a commit, like which files were changed and how many lines were added or removed, what flag should we add to git log?**<br>
-*ans.* --stat
+   _ans._ --stat
 
 # Undoing Things
+
+1. [Undoing Changes before Commiting](#undoing-changes-before-committing)
+1. [Amending Changes](#amending-changes)
+1. [RollBack](#roll-back)
+1. [Identifying a Commit](#identifying-a-commit)
+1. [Practice Quiz](#practice-quiz-undoing-things)
 
 ### Undoing Changes Before Committing
 
 - Being able to revert any changes we made is of the most powerful features offered by VCSs. There's a bunch of different techniques available. Sometimes u might find urself in a situation where you've made a bunch of changes to a file but u decided to roll back. This can be done using the <code>git checkout</code> command, followed by name of that file. Keep in mind, this command works for unstaged and modified files.
+
 ```Bash
 # Discard a change for a unstaged file
 git checkout <file>
 ```
 
 - What if u added some changes to the staging area already> Don't regret, there's a way. We can unstage our changes by using the <code>git reset</code>, followed by **HEAD** then the file name.
+
 ```Bash
 # Reset a staged file
 git reset HEAD <file>
@@ -149,12 +166,15 @@ git reset HEAD <file>
 - In general, we try to make sure our commits include all the right changes as we intend. But we're all human and we make mistakes. It's not uncommon for us or even a IT specialist to realize that there's something wrong in a recent commit. For example, you had to commit two different files for the same change but unintentionally u staged and committed the first file and left the other one, or may be ur commit context is correct but found that ur commit message isn't that descriptive enough. We can solve such problems using the <code>--amend</code> flag with git commit command.
 
 - When we run **git commit --amend**, Git takes whatever is currently in our staging area and run the commit workflow to overwrite the latest or recent commit. Let's understand this with an example. We'll create a new directory and initiate a Git first:
+
 ```Bash
 # Initialize Git
 $ git init
 Initialized empty Git repository in C:/Users/RITUKANTA/Desktop/git-amend/.git/
 ```
+
 Let's create three files called <code>favorite_foods.log</code>, <code>food_count.py</code>, and <code>food_question.py</code>. I am adding the first file favorite_foods.log in intial commit and will learn how to amend with other two files.
+
 ```Bash
 # Addedd 3 files, so let's check status
 $ git status
@@ -240,9 +260,10 @@ $ git commit -m "Added two scripts"
 - We've used the head alias with the git revert command for the most recent commit in our Git history. But the errors may take a while to be detected and it is possible that the bad commit may not be the most recent. So we need target a specific commit using its **commit ID**. Commit IDs show up when we run the **git log** command, appear right after the word 'commit'.
 
 - A **40 characters long** commit ID is made up of letters and integers. The commit ID hash is calculated using a **Cryptographic** algorithm called <code>SHA1</code>. This algorithm takes the Git commit data as input and produces a 40 characters string as the output. Git doesn't use these hashes for security reasons. Instead, they're used to **guarantee for consistency of our Git repo**. Having consistent data means getting exactly what was expected.
+
 ```
                   "You can verify the data you get back out is the exact same data you put in."
-                                                                                                
+
                                                                             - Linus Torvalds
 ```
 
@@ -253,21 +274,28 @@ $ git commit -m "Added two scripts"
 ### Practice Quiz: Undoing Things
 
 1. **Let's say we've made a mistake in our latest commit to a public branch. Which command will be the best for fixing our mistake?**<br>
-*ans.* git revert
+   _ans._ git revert
 
 2. **If we want to roll back a commit on a public branch that wasn't the most recent one using the revert command. What must we do?**<br>
-*ans.* Use the commit ID at the end of the git revert command
+   _ans._ Use the commit ID at the end of the git revert command
 
 3. **What does Git use Cryptographic hash keys for?**<br>
-*ans.* To guarantee the consistency of our repository
+   _ans._ To guarantee the consistency of our repository
 
 4. **What does the git commit --amend command do?**<br>
-*ans.* Overwrite the previous message
+   _ans._ Overwrite the previous message
 
 5. **How can we easily view the log message and diff output of the latest commit if we don't know the commit ID?**<br>
-*ans.* git show HEAD
+   _ans._ git show HEAD
 
 # Branching and Merging
+
+1. [What is a Branch?](#what-is-a-branch)
+1. [Creating New Branches](#creating-new-branches)
+1. [Working with Branches](#working-with-branches)
+1. [Merging](#merging)
+1. [Merge Conflicts](#merge-conflicts)
+1. [Practice Quiz](#practice-quiz-branching-and-merging)
 
 ### What is a Branch?
 
@@ -308,9 +336,10 @@ $ git commit -m "Added two scripts"
 ### Practice Quiz: Branching and Merging
 
 1. **When we merge two branches, one of the two algorithms is used. If the branches have divirged, which algorithm is used?**<br>
-*ans.* Three-way merge
+   _ans._ Three-way merge
 
 2. **The following code snippet represents the result of a merge conflict. Edit the code to fix the conflict and keep the version represented by the current branch.**<br>
+
 ```Python
 <<<<<<<<<HEAD
 print("Keep me!")
@@ -318,18 +347,21 @@ print("Keep me!")
 print("No, keep me instead!")
 >>>>>>>>new-feature
 ```
-*ans.*
+
+_ans._
+
 ```Python
 print("Keep me!")
 ```
 
 3. **What command would we use to throw away a merge and start over?**<br>
-*ans.* git merge --abort
+   _ans._ git merge --abort
 
 4. **How do we display a summarized view of commit history for a repo, showing one line per commit?**<br>
-*ans.* git log --graph --oneline
+   _ans._ git log --graph --oneline
 
 5. **The following script contains the result of a merge conflict. Edit the code to fix the conflict, so that both versions are included.**
+
 ```Python
 def main():
 <<<<<<< HEAD
@@ -340,7 +372,9 @@ def main():
 
 main()
 ```
-*ans.*
+
+_ans._
+
 ```Python
 def main():
     print("Start of program>>>>>>>")
@@ -350,7 +384,9 @@ main()
 ```
 
 # Module 2 Summary
+
 - Commands and tools we've learned so far:
+
 ```Python
 #! /usr/bin/bash
 
