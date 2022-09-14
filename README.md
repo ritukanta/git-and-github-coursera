@@ -16,6 +16,11 @@ Total no. of QwickLab Graded Labs - 4<br>
 
 # Course Intro
 
+1. [Course Introduction](#course-introcution)
+1. [Installation](#installation)
+
+### Course Introcution
+
 - This course focuses on how to keep track of the different versions of ur code and configuration files using <code>Version Control System</code> or <code>VCS</code>.
 
 - In ur programming and automation, VCS allows us to easily roll back or revert when mistakes take place and also helps us colloborate with other fellow programmers. Here, we're about to learn a popular VCS called <code>Git</code> and how to use it to manage ur configuration files and maintain source code of ur programms and scripts.
@@ -67,6 +72,12 @@ sudo port install git
 > - Likewise u can modify the upcoming windows in this installation process by reading on-screen text. I'm providing my screenshots how I've installed, in the /images directory.
 
 # Before Version Control
+
+1. [Intro to Module 1](#intro-to-module-1)
+1. [Diffing Files](#diffing-files)
+1. [Applying Changes](#applying-changespatching)
+1. [Diff and Patch Cheat Sheet](#diff-and-patch-cheat-sheet)
+1. [Practice Quiz](#practice-quiz-before-version-control)
 
 ### Intro to Module 1
 
@@ -157,6 +168,12 @@ $ cat change.diff
 
 # VCSs
 
+1. [What is a VCS](#what-is-a-version-control-systemvcs)
+1. [VCS and Automation](#version-control-and-automation)
+1. [What is Git?](#what-is-git)
+1. [More info about Git](#more-information-about-git)
+1. [Practice Quiz](#practice-quiz-version-control)
+
 ### What is a Version Control System(VCS)
 
 - The tools we learned recently are really useful. But most of the time, we don't be using them directly. Instead, we'll use them through a Version Control System or VCS. A VCS keeps track of the changes back to the original files.
@@ -217,6 +234,12 @@ $ cat change.diff
 
 
 # Using Git
+
+1. [First Steps with Git](#first-steps-with-git)
+1. [Tracking Files](#tracking-files)
+1. [Basic Git workflow](#basic-git-workflow)
+1. [Anatomy of a Commit Message](#anatomy-of-a-commit-message)
+1. [Practice Quiz](#practice-quiz-using-git)
 
 ### First Steps with Git
 
