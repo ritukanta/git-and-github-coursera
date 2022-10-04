@@ -123,4 +123,56 @@ $ git branch -r
 
 # Solving Conflicts
 
+### The Pull-Merge-Push Workflow
+
+- We've now looked at the details of fetching and pulling data from a remote repository without any local changes. We also know that we can use <code>git push</code> to upload new changes to the remote repository. But what if when we try to push our changes, there are new changes to the remote repo? It would most prolly fail.
+
+- That is because the remote repo contains changes that we don't have in our local branch that Git can't fast-forward. This means we need to sync our local remote branch with the remote repository before we can push. We can do this with <code>git pull</code>.
+
+- Git pull may lead to conflict if there are changes with same lines in same files, this is because git pull tries to merge automatically after syncing the remote branch. One thing to notice is that Git will try to do all possible automatic merges and only leave manual conflicts for us to resolve when the automatic merge fails.
+
+- As we've already known conflicts can be recognised by conflict dividers. So we have to resolve these conflicts even in huge files, so that we can follow the basic git workflow: stage, commit and push as usual. Upon calling git coommit, after resolving conflicts and staging changes, the editor message will say that it is a merge commit and yes, we can add additional texts it too. Together pulling, failing in merge, resolving conflicts, staging and commiting we perform a three-way-merge.
+
+### Pushing Remote Changes
+
+- As we learned before, when using Git to work on a new feature or a big refactor of some kind, it's recommended best practie to create separate branches. For example, it might take you a while to finish a new feature and in the meantime, there could be a critical bug that needs fixing in the main branch, release a new version and then go back to working on your feature without having to integrate your working tree before it's ready.
+
+### Rebasing Your Changes
+
+- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Module 3 Summary
