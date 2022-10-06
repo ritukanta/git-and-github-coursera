@@ -1,7 +1,16 @@
 **Week 3: Working with Remotes**
 <br>
 
+1. [Introduction to GitHub](#introduction-to-github)
+1. [Using a Remote Repository](#using-a-remote-repository)
+1. [Solving Conflicts](#solving-conflicts)
+1. [Module 3 Summary](#module-3-summary)
+
 # Introduction to GitHub
+
+1. [What is GitHub](#what-is-github)
+1. [Basic Interaction with GitHub](#basic-interaction-with-github)
+1. [Practice Quiz](#practice-quiz-intro-to-github)
 
 ### What is GitHub?
 
@@ -50,6 +59,11 @@
    _ans._ git clone < URL >
 
 # Using a Remote Repository
+
+1. [What is Remote?](#what-is-a-remote)
+1. [Working with Remotes](#working-with-remotes)
+1. [Fetching New Changes](#fetching-new-changes)
+1. [Practice Quiz](#practice-quiz-using-a-remote-repository)
 
 ### What is a Remote?
 
@@ -123,6 +137,13 @@ $ git branch -r
 
 # Solving Conflicts
 
+1. [The Pull-Merge-Push Workflow](#the-pull-merge-push-workflow)
+1. [Pushing Remote Changes](#pushing-remote-changes)
+1. [Rebasing Your Changes](#rebasing-your-changes)
+1. [Best Practices for Collaboration](#best-practices-for-collaboration)
+1. [Cheat Sheet](#conflict-resolution-cheat-sheet)
+1. [Practice Quiz](#practice-quiz-solving)
+
 ### The Pull-Merge-Push Workflow
 
 - We've now looked at the details of fetching and pulling data from a remote repository without any local changes. We also know that we can use <code>git push</code> to upload new changes to the remote repository. But what if when we try to push our changes, there are new changes to the remote repo? It would most prolly fail.
@@ -139,40 +160,89 @@ $ git branch -r
 
 ### Rebasing Your Changes
 
-- 
+- Rebasing means changing the base commit that's used for one branch. In case of merging two branches, if only one of the branches has new changes, Git will able to fast-forward and apply the changes. But if both branches have new changes when we try to merge, Git will create a merge commit for the three-way merge.
 
+- The problem with three-way merges is that because of the split commit history, it's hard for someone to debug when an issue is found in the code. So we can rebase before a three-way merge, that will basically ease our way to fast-forward merge and keep the history linear.
 
+- So for rebasing, we run <code>git rebase</code>, followed by the branch that we want to set as the new base. When we do this, Git will try to replay our commits after the latest commit in that branch. This will work automatically if the changes are made in different parts of the files, but will require manual intervention if the changes were made in other files.
 
+### Best Practices for Collaboration
 
+- It's a good idea to always synchronize your branches before starting any work on your own, on a repository. In this way you know that you're stating from most recent version. So that chances of three-way merges and conflicts or need of rebasing are minimized.
 
+- Another common practice is to try and avoid having very large changes that modify a lot of different files. Instead try to make changes as small as possible as long as they're self-contained. This makes it easier to understand what's going on with each commit.
 
+- One of the best practices for collaboration is to create separate feature branches when working on big projects of code. It's good idea to make changes in sepate branch from <code>master</code> branch and test the versions of code before merging back to master. As you should always keep your latest stable version in the feature and the latest version in the master branch, by merging every small changes to it. This reduces chances of merge conflicts.
 
+- Recently we learned that it's good practice to rebase to avoid three-way merges and keep the commit history linear. But you shouldn't use rebasing with the branches that are already pushed to remote repository because rebasing rewrites the commit history and ends up with creating new commits and commit hashes.
 
+### Conflict Resolution Cheat Sheet
 
+- Merge conflicts are not uncommon when working in a team of developers, or on Open Source Software. Fortunately, GitHub has some good documentation on how to handle them when they happen:
 
+  > - https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/about-merge-conflicts
+  > - https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/resolving-a-merge-conflict-using-the-command-line
 
+- You can also use [git rebase branchname](https://git-scm.com/book/en/v2/Git-Branching-Rebasing) to change the base of the current branch to be branchname.
 
+- The git rebase command is a lot more powerful. Check out [this link](https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History) for more information.
 
+### Practice Quiz: Solving
 
+1. **If you are making changes to a local branch while another user has also made changes to the remote branch, which command will trigger a merge?**<br>
+   _ans._ git pull
 
+2. **For which reason, we use rebase instead of merging?**<br>
+   _ans._ When we want to keep a linear commit history.
 
+3. **Where should we keep the latest stable version of the project?**<br>
+   _ans._ A separate branch from the master branch
 
+4. **Which are some of best practices for collaboration?**<br>
+   _ans._ When working on a big change, it makes sense to have a separate a feature branch; always synchronize your branches before starting any work on your own; avoid having very large changes that modify a lot of different things.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+5. **What command would we use to change the base of the current branch?**<br>
+   _ans._ git rebase < branch-name >
 
 # Module 3 Summary
+
+- Commands and tools we've learned in this module:
+
+```Bash
+#!/usr/bin/bash
+
+# Clone a remote repo
+git clone URL
+
+# Push changes to remote repo
+git push
+
+# Push to certain branch
+git push -u origin <branch-name>
+
+# Check remotes of fetching and pushing
+git remote -v
+
+# More info about remote origin
+git remote show origin
+
+# Check remote branches
+git branch -r
+
+# Fetch remotes and allow to merge
+git fetch
+
+# Fetch and try to merge automatically
+git pull
+
+# Merge fetched branches
+git merge FETCH_HEAD
+# or
+git merge origin/branch_name
+
+# Pick specific commits
+git cherry-pick <commit ID>
+
+# Rebase
+git rebase <branch-name>
+```

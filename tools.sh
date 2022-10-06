@@ -31,3 +31,6 @@ git merge origin/branch_name
 
 # Pick specific commits
 git cherry-pick <commit ID>
+
+# Rebase
+git rebase <branch-name>
